@@ -4,18 +4,21 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import express from "express";
 import cors from "cors";
 import path from "path";
+import { users } from "./lib/db";
 
 const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) => ({});
 type Context = inferAsyncReturnType<typeof createContext>;
 
 const t = initTRPC.context<Context>().create();
 
+// Api endpoints.
 const router = t.router({
   createUser: t.procedure.input(z.object({
     email: z.string(),
     password: z.string()
-  })).mutation(req => {
-    return req.input.email;
+  })).mutation(async req => {
+    const user = await users.create(req.input.email, req.input.password);
+    return user ? "success" : "failure";
   })
 });
 
