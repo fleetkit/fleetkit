@@ -1,0 +1,15 @@
+{
+  "private": "true",
+  "license": "MIT",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently \"yarn workspace server run dev\" \"yarn workspace client run dev\"",
+    "build": "yarn workspaces run build"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  fleetkit:
+    build: ./server
+    image: noahgav/fleetkit
+    container_name: fleetkit
+    ports:
+      - "3000:3000"
+    volumes:
+      - data:/fleetkit/data/dist
+volumes:
+  data:
