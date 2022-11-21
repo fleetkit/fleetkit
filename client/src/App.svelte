@@ -4,7 +4,7 @@
   test();
 
   async function test() {
-    const result = await client.createUser.mutate({
+    const result = await client.login.query({
       email: "email@test.com",
       password: "password",
     });
